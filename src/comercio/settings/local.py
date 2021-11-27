@@ -1,7 +1,9 @@
+import os
 from .base import *
 
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
+STATICFILES_DIRS = (
+    os.path.join(os.path.dirname(BASE_DIR), "static"),
+)
 
 DATABASES = {
     'default': {
