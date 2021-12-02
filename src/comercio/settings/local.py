@@ -8,7 +8,7 @@ STATICFILES_DIRS = (
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ipap',
+        'NAME': 'ipap3',
         'USER': 'postgres',
         'PASSWORD': '1324pg',
         'HOST': '127.0.0.1',
