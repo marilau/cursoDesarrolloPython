@@ -1,8 +1,21 @@
 {% extends "base/base.html" %}
 {% block contenido %}
 
-  <div class="row">
+<div class="row">
+	<div class="blog-main">
+		<h1 style="margin: 50px;">Últimas novedades</h1>
 
-  </div>
+		<div class="row mb-2">
+			{% for p in ultimos_productos %}
+			<div class="col-md-6">
+				{% include "productos/includes/bloque_producto.html" %}
+			</div>
+			{% empty %}
+			<li>No existen productos</li> 
+			{% endfor %}
+		</div>
+
+	</div>
+</div>
   
 {% endblock contenido %}

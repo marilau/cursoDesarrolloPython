@@ -14,7 +14,8 @@ urlpatterns = [
     path('Usuarios/', include('apps.usuarios.urls')),
 
     #Url propias del proyecto
-    path('', views.inicio, name="inicio"),
+    #path('', views.inicio, name="inicio"),
+    path('', views.Inicio.as_view(), name="inicio"),
     path('IniciarSesion/', auth_views.LoginView.as_view(template_name="login.html"), name="login"),
     path('logout/', auth_views.logout_then_login, name="logout"),
     
