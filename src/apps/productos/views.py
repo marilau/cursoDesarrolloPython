@@ -18,3 +18,6 @@ class Listar(ListView):
 	model = Producto
 	context_object_name = 'lista_productos'
 	paginate_by = 2
+
+	def get_queryset(self):
+		return Producto.objects.filter(activo=True).order_by("nombre")
