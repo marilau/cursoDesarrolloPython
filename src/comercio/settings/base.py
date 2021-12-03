@@ -12,9 +12,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-nsg2$5zp#qw3c5)!lnl49x$$&nx403u#&5%hsq+v_-^qmmc3c@'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
 ALLOWED_HOSTS = ['*']
 
 LOGIN_REDIRECT_URL = reverse_lazy("inicio")
