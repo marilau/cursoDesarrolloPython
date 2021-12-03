@@ -7,7 +7,7 @@ class Producto(models.Model):
 	cantidad = models.IntegerField(default=0)
 	
 	activo = models.BooleanField(default=True)
-	imagen = models.ImageField(upload_to="productos", null=True)
+	imagen = models.ImageField(upload_to="productos", null=True, blank=True)
 
 	class Meta:
 		db_table = "productos"
