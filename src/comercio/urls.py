@@ -8,7 +8,13 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    #Incledes
     path('Productos/', include('apps.productos.urls')),
+
+    #Url propias del proyecto
     path('', views.inicio, name="inicio"),
     path('IniciarSesion/', auth_views.LoginView.as_view(template_name="login.html"), name="login"),
+    path('logout/', auth_views.logout_then_login, name="logout"),
+    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
