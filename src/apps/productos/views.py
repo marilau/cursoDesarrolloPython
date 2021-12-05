@@ -1,9 +1,11 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins     import LoginRequiredMixin
-from django.shortcuts               import render
+from django.shortcuts               import render, redirect
 from django.urls                    import reverse_lazy
 from django.views.generic           import ListView, CreateView
 from django.views.generic.edit      import UpdateView
+from django.views.generic.detail    import DetailView
+
 
 from .forms import ProductoForm
 from .models import Producto
@@ -58,3 +60,14 @@ class Editar(LoginRequiredMixin, UpdateView):
 
 	def get_success_url(self, **kwargs):
 		return reverse_lazy("productos:admin_listar")
+
+class Detalle(LoginRequiredMixin, DetailView):
+	model = Producto
+	template_name = "productos/admin/detalle.html"
+
+
+def borrar(request, pk):
+	p = Producto.objects.get(id=pk)
+	p.delete()
+	return redirect("productos:admin_listar")
+
