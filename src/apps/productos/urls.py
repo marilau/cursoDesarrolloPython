@@ -7,6 +7,7 @@ app_name = "productos"
 urladmin = [
 	path("Admin/Listar/", views.ListarAdmin.as_view(), name="admin_listar"),
 	path("Admin/Nuevo/", views.Crear.as_view(), name="admin_nuevo"),
+	path("Admin/Editar/<int:pk>/", views.Editar.as_view(), name="admin_editar"),
 ]
 
 urlsitio = [
