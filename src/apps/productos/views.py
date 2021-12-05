@@ -6,6 +6,8 @@ from django.views.generic           import ListView, CreateView
 from django.views.generic.edit      import UpdateView
 from django.views.generic.detail    import DetailView
 
+from apps.core.decorators import superuser_required
+from apps.core.mixins import SuperUserRequiredMixin
 
 from .forms import ProductoForm
 from .models import Producto
@@ -35,7 +37,7 @@ class Listar(LoginRequiredMixin, ListView):
 # ========================================================
 
 
-class ListarAdmin(LoginRequiredMixin, ListView):
+class ListarAdmin(SuperUserRequiredMixin, LoginRequiredMixin, ListView):
 	template_name = "productos/admin/listar.html"
 	model = Producto
 	context_object_name = 'lista_productos'
@@ -45,7 +47,7 @@ class ListarAdmin(LoginRequiredMixin, ListView):
 		return Producto.objects.all().order_by("id")
 
 
-class Crear(LoginRequiredMixin, CreateView):
+class Crear(SuperUserRequiredMixin, LoginRequiredMixin, CreateView):
 	template_name = "productos/admin/nuevo.html"
 	model = Producto
 	form_class = ProductoForm
@@ -61,13 +63,12 @@ class Editar(LoginRequiredMixin, UpdateView):
 	def get_success_url(self, **kwargs):
 		return reverse_lazy("productos:admin_listar")
 
-class Detalle(LoginRequiredMixin, DetailView):
+class Detalle(SuperUserRequiredMixin, LoginRequiredMixin, DetailView):
 	model = Producto
 	template_name = "productos/admin/detalle.html"
 
-
+@superuser_required()
 def borrar(request, pk):
 	p = Producto.objects.get(id=pk)
 	p.delete()
 	return redirect("productos:admin_listar")
-

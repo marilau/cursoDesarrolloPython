@@ -6,3 +6,6 @@ class Usuario(AbstractUser):
 
 	class Meta:
 		db_table = "usuarios"
+
+	def __str__(self):
+		return self.get_full_name()
