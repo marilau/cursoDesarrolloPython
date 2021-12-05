@@ -10,7 +10,7 @@ from apps.core.decorators import superuser_required
 from apps.core.mixins import SuperUserRequiredMixin
 
 from .forms import ProductoForm
-from .models import Producto
+from .models import Producto, Categoria
 
 """
 @login_required
@@ -27,7 +27,7 @@ class Listar(LoginRequiredMixin, ListView):
 	template_name = "productos/listar.html"
 	model = Producto
 	context_object_name = 'lista_productos'
-	paginate_by = 2
+	paginate_by = 5
 
 	def get_queryset(self):
 		return Producto.objects.filter(activo=True).order_by("nombre")
@@ -72,3 +72,11 @@ def borrar(request, pk):
 	p = Producto.objects.get(id=pk)
 	p.delete()
 	return redirect("productos:admin_listar")
+
+# ========================================================
+#                  Vistas para Comentario
+# ========================================================
+
+class VerProducto(DetailView):
+	model = Producto
+	template_name = "productos/ver.html"

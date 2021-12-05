@@ -5,7 +5,8 @@
 			<a class="text-dark" href="#">{{p.nombre}}</a>
 		</h3>
 		<p class="card-text mb-auto">$ {{p.precio}}</p>
-		<a href="#">Ver más</a>
+		
+		<a href="{% url 'productos:ver_producto' p.id  %}">Ver más</a>
 	</div>
 	{% if p.imagen %}
 		<img class="card-img-right flex-auto d-none d-md-block" src="{{p.imagen.url}}" data-holder-rendered="true">
