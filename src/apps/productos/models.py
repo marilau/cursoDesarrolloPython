@@ -1,5 +1,14 @@
 from django.db import models
 
+class Tag(models.Model):
+	nombre = models.CharField(max_length=250)
+
+	class Meta:
+		db_table = "tags"
+
+	def __str__(self):
+		return self.nombre
+
 class Categoria(models.Model):
 	nombre = models.CharField(max_length=250)
 
@@ -8,6 +17,11 @@ class Categoria(models.Model):
 
 	def __str__(self):
 		return self.nombre
+"""
+class ProductoTag(models.Model):
+	tag = models.ForeignKey(Tag, on_delete=models.CASCADE)
+	producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+"""
 
 class Producto(models.Model):
 	nombre = models.CharField(max_length=250)
@@ -18,7 +32,8 @@ class Producto(models.Model):
 	imagen = models.ImageField(upload_to="productos", null=True, blank=True)
 
 	categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, related_name='productos_relacionados', null=True)
-
+	tags = models.ManyToManyField(Tag)
+	
 	class Meta:
 		db_table = "productos"
 
