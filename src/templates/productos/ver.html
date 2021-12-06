@@ -28,5 +28,7 @@
 			<a href="{% url 'productos:listar' %}">Volver</a>
 		</div>
 	</div>
+	<a href="{% url 'productos:crear_comentario' %}">Hacer un comentario</a>
+	{% include "productos/comentarios/listar.html" %}
 	</div>
 {% endblock contenido %}

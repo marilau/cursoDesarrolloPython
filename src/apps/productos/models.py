@@ -1,5 +1,7 @@
 from django.db import models
 
+from apps.usuarios.models  import Usuario
+
 class Tag(models.Model):
 	nombre = models.CharField(max_length=250)
 
@@ -33,7 +35,7 @@ class Producto(models.Model):
 
 	categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, related_name='productos_relacionados', null=True)
 	tags = models.ManyToManyField(Tag)
-	
+
 	class Meta:
 		db_table = "productos"
 
@@ -41,4 +43,13 @@ class Producto(models.Model):
 		return self.nombre
 
 #productos = Producto.objects.all()
+
+class Comentario(models.Model):
+	producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+	usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+
+	descripcion = models.CharField(max_length=500)
+	
+	class Meta:
+		db_table = "comentarios"
 

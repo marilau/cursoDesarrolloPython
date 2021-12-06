@@ -1,0 +1,15 @@
+<div class="row mb-2">
+	{% for c in lista_comentarios %}
+	<div class="col-md-6">
+		<p>{{c.producto}}</p>
+		<p>{{c.usuario}}</p>
+		<p>{{c.descripcion}}</p>
+	</div>
+
+		{% empty %}
+			<li>No existen comentarios.</li>
+	{% endfor %}
+</div>
+<div class="row">
+	{% include "includes/paginador.html" %}
+</div>

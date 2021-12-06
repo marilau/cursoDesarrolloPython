@@ -16,6 +16,7 @@ urlsitio = [
 	#path("ListarProductos/", views.listar, name="listar")
 	path("ListarProductos/", views.Listar.as_view(), name="listar"),
 	path("Ver/<int:pk>/", views.VerProducto.as_view(), name="ver_producto"),
+	path("CrearComentario/", views.CrearComentario.as_view(), name="crear_comentario"),
 ]
 
 urlpatterns = urladmin + urlsitio

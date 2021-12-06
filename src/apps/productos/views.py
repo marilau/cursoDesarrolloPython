@@ -9,8 +9,8 @@ from django.views.generic.detail    import DetailView
 from apps.core.decorators import superuser_required
 from apps.core.mixins import SuperUserRequiredMixin
 
-from .forms import ProductoForm
-from .models import Producto, Categoria
+from .forms import ProductoForm, ComentarioForm
+from .models import Producto, Categoria, Comentario
 
 """
 @login_required
@@ -80,3 +80,30 @@ def borrar(request, pk):
 class VerProducto(DetailView):
 	model = Producto
 	template_name = "productos/ver.html"
+
+class ListarComentarios(ListView):
+	template_name = "productos/comentarios/listar.html"
+	model = Comentario
+	context_object_name = 'lista_comentarios'
+	paginate_by = 5
+
+	def get_queryset(self):
+		return Comentario.objects.all().order_by("id")
+
+class CrearComentario(LoginRequiredMixin, CreateView):
+	template_name = "productos/comentarios/nuevo.html"
+	model = Comentario
+	form_class = ComentarioForm
+
+	def get_success_url(self, **kwargs):
+		return reverse_lazy("productos:admin_listar")
+
+class EditarComentario(LoginRequiredMixin, UpdateView):
+	template_name = "productos/comentarios/editar.html"
+	model = Comentario
+	form_class = ComentarioForm
+
+def borrar_comentario(request, pk):
+	c = Comentario.objects.get(id=pk)
+	c.delete()
+	return redirect("productos:listar")
